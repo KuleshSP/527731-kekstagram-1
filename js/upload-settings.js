@@ -38,7 +38,7 @@
   var closeUpload = function () {
     UPLOAD_OVERLAY.classList.add('hidden');
     document.removeEventListener('keydown', onUploadEscPress);
-    UPLOAD.value = '';
+    window.UPLOAD.value = '';
   };
 
   var resizeImage = function (image, resizeValue) {

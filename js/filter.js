@@ -17,7 +17,7 @@
 
   var getFiltersClass = function (arr) {
     var secondClassArr = [];
-    arr.forEach( function(el, i) {
+    arr.forEach(function (el, i) {
       secondClassArr[i] = el.classList[1];
     });
 
@@ -52,7 +52,7 @@
   };
 
   var addEvents = function (filter, classArr) {
-    classArr.forEach( function(el, i) {
+    classArr.forEach(function (el, i) {
       return createEventListener(filter[i], el);
     });
   };

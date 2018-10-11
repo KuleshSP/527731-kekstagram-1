@@ -15,7 +15,6 @@
   var SOCIAL_COMMENTS = document.querySelector('.social__comments');
   var CLOSE_BUTTON_BIG_PICTURE = document.querySelector('.big-picture__cancel');
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-  var fileChooser = document.querySelector('.img-upload__input');
 
   var setBigPictureData = function (control, data, avatarIndexMin, avatarIndexMax) {
     var commentsFragment = createCommentsFragment(data, avatarIndexMin, avatarIndexMax);
@@ -45,7 +44,7 @@
 
   var createCommentsFragment = function (data, avatarUrlMin, avatarUrlMax) {
     var fragment = document.createDocumentFragment();
-    data.comments.forEach( function(el, i) {
+    data.comments.forEach(function (el) {
       var text = el;
       var url = generateAvatarUrl(avatarUrlMin, avatarUrlMax);
       var commentItem = renderComment(text, url);

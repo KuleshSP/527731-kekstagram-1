@@ -26,26 +26,26 @@
     return array;
   };
 
-  var sortingNewImages = function (array) {
+  var sortNewImages = function (array) {
     var newArray = array.slice();
     var shuffledArray = shuffle(newArray);
     shuffledArray.length = 10;
     return shuffledArray;
   };
 
-  var sortingDiscussingImages = function (array) {
+  var sortDiscussingImages = function (array) {
     var newArray = array.slice();
     newArray.sort(function (a, b) {
       return b.comments.length - a.comments.length;
-    })
+    });
     return newArray;
   };
 
   var createSortEventListener = function (btns, array) {
     btns.addEventListener('click', function (evt) {
-      SORTING_BUTTONS.forEach(function (element) {
+      window.SORTING_BUTTONS.forEach(function (element) {
         element.className = 'img-filters__button';
-      })
+      });
       var target = evt.target;
       target.classList.add('img-filters__button--active');
       clearGallery();
@@ -56,14 +56,14 @@
   window.addSortingEvents = function (btns, array) {
     Array.prototype.some.call(btns, function (elem, i) {
       return createSortEventListener(btns[i], array);
-    })
+    });
   };
 
   var clearGallery = function () {
     var pictureLink = document.querySelectorAll('.picture__link');
     pictureLink.forEach(function (element) {
       window.userDialog.removeChild(element);
-    })
+    });
   };
 
   var sorting = function (arr) {
@@ -74,10 +74,10 @@
         sorted = arr;
         break;
       case BUTTON_SORT_NEW.classList[1]:
-        sorted = sortingNewImages(arr);
+        sorted = sortNewImages(arr);
         break;
       case BUTTON_SORT_DISCUSSED.classList[1]:
-        sorted = sortingDiscussingImages(arr);
+        sorted = sortDiscussingImages(arr);
         break;
     }
     var photosFragment = window.createPhotosFragment(sorted);

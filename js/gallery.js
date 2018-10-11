@@ -15,7 +15,7 @@
 
   window.createPhotosFragment = function (array) {
     var fragment = document.createDocumentFragment();
-    array.forEach( function(el, i) {
+    array.forEach(function (el) {
       fragment.appendChild(renderPhoto(el, similarPhotoTemplate));
     });
 
