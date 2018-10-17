@@ -58,8 +58,8 @@
   var onPlusClick = function () {
     var resizeValue = (defaultResizeValue += RESIZE_STEP) + '%';
     RESIZE_CONTROL_VALUE.value = resizeValue;
-    defaultResizeValue < RESIZE_MAX_VALUE ? RESIZE_MINUS_BUTTON.disabled = false : RESIZE_PLUS_BUTTON.disabled = true;
     resizeImage(window.imgUploadPreview, defaultResizeValue);
+    return defaultResizeValue < RESIZE_MAX_VALUE ? RESIZE_MINUS_BUTTON.disabled = false : RESIZE_PLUS_BUTTON.disabled = true;
   };
   var onMinusClick = function () {
     RESIZE_CONTROL_VALUE.value = (defaultResizeValue -= RESIZE_STEP) + '%';

@@ -25,7 +25,7 @@
   };
 
   var hideScale = function (classArray) {
-    classArray !== filtersClassArray[0] ? window.UPLOAD_SCALE.classList.remove('hidden') : window.UPLOAD_SCALE.classList.add('hidden');
+    return classArray !== filtersClassArray[0] ? window.UPLOAD_SCALE.classList.remove('hidden') : window.UPLOAD_SCALE.classList.add('hidden');
   };
 
   var scalePinPosition = function (pinPositionValue) {

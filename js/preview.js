@@ -82,7 +82,9 @@
     var SOCIAL_COMMENT = document.querySelectorAll('.social__comment');
     var commentsArray = [];
     Array.from(SOCIAL_COMMENT).forEach(function (element, index) {
-      return element.classList.length < 3 ? commentsArray[index] = index : null;
+      if (element.classList.length < 3) {
+        commentsArray[index] = index;
+      }
     });
     var result = SOCIAL_COMMENT_COUNT.innerHTML = commentsArray.length + ' из ' + SOCIAL_COMMENT.length + ' комментариев';
 
