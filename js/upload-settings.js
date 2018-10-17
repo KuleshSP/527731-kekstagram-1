@@ -59,11 +59,13 @@
     var resizeValue = (defaultResizeValue += RESIZE_STEP) + '%';
     RESIZE_CONTROL_VALUE.value = resizeValue;
     RESIZE_PLUS_BUTTON.disabled = defaultResizeValue < RESIZE_MAX_VALUE ? false : true;
+    RESIZE_MINUS_BUTTON.disabled = defaultResizeValue < RESIZE_MAX_VALUE ? true : false;
     resizeImage(window.imgUploadPreview, defaultResizeValue);
   };
   var onMinusClick = function () {
     RESIZE_CONTROL_VALUE.value = (defaultResizeValue -= RESIZE_STEP) + '%';
     RESIZE_MINUS_BUTTON.disabled = defaultResizeValue > RESIZE_MIN_VALUE ? false : true;
+    RESIZE_PLUS_BUTTON.disabled = defaultResizeValue > RESIZE_MIN_VALUE ? true : false;
     resizeImage(window.imgUploadPreview, defaultResizeValue);
   };
 
