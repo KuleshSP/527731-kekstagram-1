@@ -12,8 +12,8 @@
   var MIN_BRIGHTNESS_VALUE = 1;
   var MAX_BRIGHTNESS_VALUE = 3;
   var MAX_SCALE_VALUE = '100%';
-  var SCALE_PIN = document.querySelector('.scale__pin');
-  var SCALE_LEVEL = document.querySelector('.scale__level');
+  var SCALE_PIN = document.querySelector('.effect-level__pin');
+  var SCALE_LEVEL = document.querySelector('.effect-level__depth');
 
   var getFiltersClass = function (arr) {
     var secondClassArr = [];
@@ -24,12 +24,8 @@
     return secondClassArr;
   };
 
-  var hideScale = function (classArr) {
-    if (classArr !== filtersClassArray[0]) {
-      window.UPLOAD_SCALE.classList.remove('hidden');
-    } else {
-      window.UPLOAD_SCALE.classList.add('hidden');
-    }
+  var hideScale = function (classArray) {
+    classArray !== filtersClassArray[0] ? window.UPLOAD_SCALE.classList.remove('hidden') : window.UPLOAD_SCALE.classList.add('hidden');
   };
 
   var scalePinPosition = function (pinPositionValue) {
@@ -82,7 +78,10 @@
   var filterSaturation = function () {
     var currentImageClass = window.imgUploadPreview.className;
     var pinPosition = parseInt(SCALE_PIN.style.left, 10);
+    var EFFECT_LEVEL_INPUT = document.querySelector('.effect-level__value');
+    EFFECT_LEVEL_INPUT.value = pinPosition.toString();
     window.imgUploadPreview.style.filter = selectFilter(currentImageClass, pinPosition);
+
     return window.imgUploadPreview.style.filter;
   };
 

@@ -3,9 +3,9 @@
 (function () {
   window.successHandler = function (array) {
     var photosFragment = window.createPhotosFragment(array);
-    window.userDialog.appendChild(photosFragment);
+    window.utils.userDialog.appendChild(photosFragment);
     window.onImageClick(array);
-    window.addSortingEvents(window.SORTING_BUTTONS, array);
+    window.addSortingEvents(window.utils.SORTING_BUTTONS, array);
     window.sortingShow();
   };
 
@@ -22,4 +22,5 @@
   };
 
   window.load(window.successHandler, window.errorHandler);
+//  window.uploadInfo(window.onLoadSuccesHandler, window.onLoadErrorHandler);
 })();

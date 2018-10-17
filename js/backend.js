@@ -1,8 +1,13 @@
 'use strict';
 
 (function () {
-  var URLLoad = 'https://js.dump.academy/kekstagram/data';
-  var URLUpload = 'https://js.dump.academy/kekstagram';
+  var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
+  var URL_UPLOAD = 'https://js.dump.academy/kekstagram';
+  var XHR_LOAD_TIMEOUT = 5000;
+  var XHR_UPLOAD_TIMEOUT = 10000;
+  var ERROR_400 = 'Неверный запрос';
+  var ERROR_401 = 'Пользователь не авторизован';
+  var ERROR_404 = 'Ничего не найдено';
 
   window.load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -15,13 +20,13 @@
           onLoad(xhr.response);
           break;
         case 400:
-          error = 'Неверный запрос';
+          error = ERROR_400;
           break;
         case 401:
-          error = 'Пользователь не авторизован';
+          error = ERROR_401;
           break;
         case 404:
-          error = 'Ничего не найдено';
+          error = ERROR_404;
           break;
 
         default:
@@ -38,9 +43,9 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 5000;
+    xhr.timeout = XHR_LOAD_TIMEOUT;
 
-    xhr.open('GET', URLLoad);
+    xhr.open('GET', URL_LOAD);
     xhr.send();
   };
 
@@ -56,13 +61,13 @@
           onLoad(xhr.response);
           break;
         case 400:
-          error = 'Неверный запрос';
+          error = ERROR_400;
           break;
         case 401:
-          error = 'Пользователь не авторизован';
+          error = ERROR_401;
           break;
         case 404:
-          error = 'Ничего не найдено';
+          error = ERROR_404;
           break;
 
         default:
@@ -79,9 +84,9 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    xhr.timeout = XHR_UPLOAD_TIMEOUT;
 
-    xhr.open('POST', URLUpload);
+    xhr.open('POST', URL_UPLOAD);
     xhr.send(data);
   };
 })();

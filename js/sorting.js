@@ -2,10 +2,12 @@
 
 (function () {
   var SORTING = document.querySelector('.img-filters');
-  window.SORTING_BUTTONS = document.querySelectorAll('.img-filters__button');
   var BUTTON_SORT_POPULAR = document.getElementById('filter-popular');
   var BUTTON_SORT_NEW = document.getElementById('filter-new');
   var BUTTON_SORT_DISCUSSED = document.getElementById('filter-discussed');
+  var NEW_IMAGES_QUANTITY = 10;
+  var TIMEOUT_LENGTH = 300;
+  var lastTimeout;
 
   window.sortingShow = function () {
     SORTING.classList.remove('img-filters--inactive');
@@ -29,7 +31,7 @@
   var sortNewImages = function (array) {
     var newArray = array.slice();
     var shuffledArray = shuffle(newArray);
-    shuffledArray.length = 10;
+    shuffledArray.length = NEW_IMAGES_QUANTITY;
     return shuffledArray;
   };
 
@@ -41,15 +43,24 @@
     return newArray;
   };
 
+  var sortingDebounce = function (array) {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      clearGallery();
+      sorting(array);
+    }, TIMEOUT_LENGTH);
+  };
+
   var createSortEventListener = function (btns, array) {
     btns.addEventListener('click', function (evt) {
-      window.SORTING_BUTTONS.forEach(function (element) {
+      window.utils.SORTING_BUTTONS.forEach(function (element) {
         element.className = 'img-filters__button';
       });
       var target = evt.target;
       target.classList.add('img-filters__button--active');
-      clearGallery();
-      sorting(array);
+      sortingDebounce(array);
     });
   };
 
@@ -60,9 +71,9 @@
   };
 
   var clearGallery = function () {
-    var pictureLink = document.querySelectorAll('.picture__link');
+    var pictureLink = document.querySelectorAll('.picture');
     pictureLink.forEach(function (element) {
-      window.userDialog.removeChild(element);
+      window.utils.userDialog.removeChild(element);
     });
   };
 
@@ -81,7 +92,7 @@
         break;
     }
     var photosFragment = window.createPhotosFragment(sorted);
-    window.userDialog.appendChild(photosFragment);
+    window.utils.userDialog.appendChild(photosFragment);
     window.onImageClick(sorted);
   };
 })();

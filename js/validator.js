@@ -20,52 +20,48 @@
     return sortedArr;
   };
 
-  var regExpCheck = function (arr, regEx) {
+  var lengthСheck = function (arr, regEx) {
     var check = arr.every(function (el) {
       return el.match(regEx)[0];
     });
     if (!check) {
-      window.utils.UPLOAD_HASTAG.setCustomValidity('Хештэг начинается с символа "#" и не должен привышать 20 символов!');
+      window.utils.UPLOAD_HASHTAG.setCustomValidity('Хештэг начинается с символа "#" и не должен привышать 20 символов!');
     }
 
     return arr;
   };
 
-  var similarCheck = function (arr) {
-    arr.reduce(function (a, b) {
-      if (a === b) {
-        window.utils.UPLOAD_HASTAG.setCustomValidity('Удалите одинаковые хештеги!');
+  var similarCheck = function (array) {
+    array.forEach(function (el, i, arr) {
+      if (arr[i] === arr[i + 1]) {
+        window.utils.UPLOAD_HASHTAG.setCustomValidity('Удалите одинаковые хештеги!');
       }
     });
 
-    return arr;
+    return array;
   };
 
-  var stringRegExpCheck = function (stringToSplit, separator, hashtagAmount) {
+  var validityCheck = function (stringToSplit, separator, hashtagAmount) {
     var strings = splitString(stringToSplit, separator);
     var sortedArray = sortArray(strings);
     var regExp = /([#]{1,1}[A-Za-zА-Яа-яЁё0-9\-\_]{1,19}\s?){0,1}$/;
 
     if (sortedArray.length > hashtagAmount) {
-      window.utils.UPLOAD_HASTAG.setCustomValidity('Не больше пяти хэштэгов!');
+      window.utils.UPLOAD_HASHTAG.setCustomValidity('Не больше пяти хэштэгов!');
     } else {
-      window.utils.UPLOAD_HASTAG.setCustomValidity('');
-      var checkedArray = regExpCheck(sortedArray, regExp);
+      window.utils.UPLOAD_HASHTAG.setCustomValidity('');
+      var checkedArray = lengthСheck(sortedArray, regExp);
       var similarChecked = similarCheck(checkedArray);
     }
     return similarChecked;
   };
 
   var textLimiter = function (inputValue, limit) {
-    if (inputValue.length > limit) {
-      window.utils.UPLOAD_TEXT.setCustomValidity('Не больше 140 символов!');
-    } else {
-      window.utils.UPLOAD_TEXT.setCustomValidity('');
-    }
+    inputValue.length > limit ? window.utils.UPLOAD_TEXT.setCustomValidity('Не больше 140 символов!') : window.utils.UPLOAD_TEXT.setCustomValidity('');
   };
 
-  window.utils.UPLOAD_HASTAG.addEventListener('input', function () {
-    stringRegExpCheck(window.utils.UPLOAD_HASTAG.value, SPACE, HASHTAG_AMOUNT);
+  window.utils.UPLOAD_HASHTAG.addEventListener('input', function () {
+    validityCheck(window.utils.UPLOAD_HASHTAG.value, SPACE, HASHTAG_AMOUNT);
   });
   window.utils.UPLOAD_TEXT.addEventListener('input', function () {
     textLimiter(window.utils.UPLOAD_TEXT.value, TEXT_LIMIT);

@@ -1,14 +1,14 @@
 'use strict';
 
 (function () {
-  var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
+  var similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
   var renderPhoto = function (array, imageTemplate) {
     var photoElement = imageTemplate.cloneNode(true);
 
     photoElement.querySelector('.picture__img').src = array.url;
-    photoElement.querySelector('.picture__stat--likes').textContent = array.likes;
-    photoElement.querySelector('.picture__stat--comments').textContent = array.comments.length;
+    photoElement.querySelector('.picture__likes').textContent = array.likes;
+    photoElement.querySelector('.picture__comments').textContent = array.comments.length;
 
     return photoElement;
   };
