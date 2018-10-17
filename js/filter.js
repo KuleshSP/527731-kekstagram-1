@@ -109,7 +109,7 @@
       var MAX_SCALE_PIN_VALUE = 100;
       var SCALE_PIN_OFFSET_LEFT = 453;
       window.SCALE_PIN.style.left = (window.SCALE_PIN.offsetLeft - shift.x) * 100 / SCALE_PIN_OFFSET_LEFT + '%';
-      window.SCALE_LEVEL.style.width = SCALE_PIN.style.left;
+      window.SCALE_LEVEL.style.width = window.SCALE_PIN.style.left;
       var pinPosition = parseInt(window.SCALE_PIN.style.left, 10);
       if (pinPosition < MIN_SCALE_PIN_VALUE) {
         window.SCALE_PIN.style.left = MIN_SCALE_PIN_VALUE + '%';
