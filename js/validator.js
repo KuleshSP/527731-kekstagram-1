@@ -57,7 +57,8 @@
   };
 
   var textLimiter = function (inputValue, limit) {
-    inputValue.length > limit ? window.utils.UPLOAD_TEXT.setCustomValidity('Не больше 140 символов!') : window.utils.UPLOAD_TEXT.setCustomValidity('');
+    var customValidity = inputValue.length > limit ? 'Не больше 140 символов!' : '';
+    window.utils.UPLOAD_TEXT.setCustomValidity(customValidity);
   };
 
   window.utils.UPLOAD_HASHTAG.addEventListener('input', function () {

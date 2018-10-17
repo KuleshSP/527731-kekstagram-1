@@ -58,12 +58,12 @@
   var onPlusClick = function () {
     var resizeValue = (defaultResizeValue += RESIZE_STEP) + '%';
     RESIZE_CONTROL_VALUE.value = resizeValue;
+    RESIZE_PLUS_BUTTON.disabled = defaultResizeValue < RESIZE_MAX_VALUE ? false : true;
     resizeImage(window.imgUploadPreview, defaultResizeValue);
-    return defaultResizeValue < RESIZE_MAX_VALUE ? RESIZE_MINUS_BUTTON.disabled = false : RESIZE_PLUS_BUTTON.disabled = true;
   };
   var onMinusClick = function () {
     RESIZE_CONTROL_VALUE.value = (defaultResizeValue -= RESIZE_STEP) + '%';
-    defaultResizeValue > RESIZE_MIN_VALUE ? RESIZE_PLUS_BUTTON.disabled = false : RESIZE_MINUS_BUTTON.disabled = true;
+    RESIZE_MINUS_BUTTON.disabled = defaultResizeValue > RESIZE_MIN_VALUE ? false : true;
     resizeImage(window.imgUploadPreview, defaultResizeValue);
   };
 
