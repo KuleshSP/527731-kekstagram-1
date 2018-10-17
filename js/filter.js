@@ -25,12 +25,12 @@
   };
 
   var hideScale = function (classArray) {
-    return classArray !== filtersClassArray[0] ? window.UPLOAD_SCALE.classList.remove('hidden') : window.UPLOAD_SCALE.classList.add('hidden');
+    return classArray !== window.filtersClassArray[0] ? window.UPLOAD_SCALE.classList.remove('hidden') : window.UPLOAD_SCALE.classList.add('hidden');
   };
 
   var scalePinPosition = function (pinPositionValue) {
-    SCALE_PIN.style.left = pinPositionValue;
-    SCALE_LEVEL.style.width = SCALE_PIN.style.left;
+    window.SCALE_PIN.style.left = pinPositionValue;
+    SCALE_LEVEL.style.width = window.SCALE_PIN.style.left;
   };
 
   var addEffect = function (className) {
@@ -49,7 +49,7 @@
     filter.addEventListener('click', filterSetup.bind(null, classArr));
   };
 
-window.addEvents = function (filter, classArr) {
+  window.addEvents = function (filter, classArr) {
     classArr.forEach(function (el, i) {
       return createEventListener(filter[i], el);
     });
@@ -58,19 +58,19 @@ window.addEvents = function (filter, classArr) {
   var selectFilter = function (currentImageClass, pinPositionValue) {
     var ret = '';
     switch (currentImageClass) {
-      case filtersClassArray[1]:
+      case window.filtersClassArray[1]:
         ret = 'grayscale(' + (pinPositionValue * 0.01) + ')';
         break;
-      case filtersClassArray[2]:
+      case window.filtersClassArray[2]:
         ret = 'sepia(' + (pinPositionValue * 0.01) + ')';
         break;
-      case filtersClassArray[3]:
+      case window.filtersClassArray[3]:
         ret = 'invert(' + pinPositionValue + '%)';
         break;
-      case filtersClassArray[4]:
+      case window.filtersClassArray[4]:
         ret = 'blur(' + (pinPositionValue * MAX_BLUR_VALUE) * 0.01 + 'px)';
         break;
-      case filtersClassArray[5]:
+      case window.filtersClassArray[5]:
         ret = 'brightness(' + (MIN_BRIGHTNESS_VALUE + ((MAX_BRIGHTNESS_VALUE - MIN_BRIGHTNESS_VALUE) * (pinPositionValue * 0.01))) + ')';
         break;
     }
@@ -79,7 +79,7 @@ window.addEvents = function (filter, classArr) {
 
   var filterSaturation = function () {
     var currentImageClass = window.imgUploadPreview.className;
-    var pinPosition = parseInt(SCALE_PIN.style.left, 10);
+    var pinPosition = parseInt(window.SCALE_PIN.style.left, 10);
     var EFFECT_LEVEL_INPUT = document.querySelector('.effect-level__value');
     EFFECT_LEVEL_INPUT.value = pinPosition.toString();
     window.imgUploadPreview.style.filter = selectFilter(currentImageClass, pinPosition);
@@ -108,18 +108,18 @@ window.addEvents = function (filter, classArr) {
       var MIN_SCALE_PIN_VALUE = 0;
       var MAX_SCALE_PIN_VALUE = 100;
       var SCALE_PIN_OFFSET_LEFT = 453;
-      SCALE_PIN.style.left = (SCALE_PIN.offsetLeft - shift.x) * 100 / SCALE_PIN_OFFSET_LEFT + '%';
-      SCALE_LEVEL.style.width = SCALE_PIN.style.left;
-      var pinPosition = parseInt(SCALE_PIN.style.left, 10);
+      window.SCALE_PIN.style.left = (window.SCALE_PIN.offsetLeft - shift.x) * 100 / SCALE_PIN_OFFSET_LEFT + '%';
+      window.SCALE_LEVEL.style.width = SCALE_PIN.style.left;
+      var pinPosition = parseInt(window.SCALE_PIN.style.left, 10);
       if (pinPosition < MIN_SCALE_PIN_VALUE) {
-        SCALE_PIN.style.left = MIN_SCALE_PIN_VALUE + '%';
+        window.SCALE_PIN.style.left = MIN_SCALE_PIN_VALUE + '%';
         SCALE_LEVEL.style.width = MIN_SCALE_PIN_VALUE + '%';
         document.removeEventListener('mousemove', onMouseMove);
       } else {
         document.addEventListener('mousemove', onMouseMove);
       }
       if (pinPosition > MAX_SCALE_PIN_VALUE) {
-        SCALE_PIN.style.left = MAX_SCALE_PIN_VALUE + '%';
+        window.SCALE_PIN.style.left = MAX_SCALE_PIN_VALUE + '%';
         SCALE_LEVEL.style.width = MAX_SCALE_PIN_VALUE + '%';
         document.removeEventListener('mousemove', onMouseMove);
       }
@@ -135,5 +135,5 @@ window.addEvents = function (filter, classArr) {
     document.addEventListener('mouseup', onMouseUp);
   };
 
-  window.filtersClassArray = getFiltersClass(FILTERS);
+  window.filtersClassArray = getFiltersClass(window.FILTERS);
 })();

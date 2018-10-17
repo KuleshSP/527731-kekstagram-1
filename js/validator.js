@@ -8,8 +8,8 @@
 
   var splitString = function (stringToSplit, separator) {
     var arrayOfStrings = stringToSplit.trim().split(separator);
-    var spaceCheckedArray = arrayOfStrings.filter( function (string) {
-       return SPACE_CHECK.test(string);
+    var spaceCheckedArray = arrayOfStrings.filter(function (string) {
+      return SPACE_CHECK.test(string);
     });
     return spaceCheckedArray;
   };
