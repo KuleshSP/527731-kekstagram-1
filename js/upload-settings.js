@@ -14,10 +14,10 @@
   var RESIZE_MAX_VALUE = 100;
   var RESIZE_MIN_VALUE = 25;
   var RESIZE_STEP = 25;
+  var FORM = document.querySelector('.img-upload__form');
   var defaultResizeValue = 100;
   window.imgUploadPreview = document.querySelector('.img-upload__preview').children[0];
   window.UPLOAD_SCALE = document.querySelector('.img-upload__effect-level');
-  var FORM = document.querySelector('.img-upload__form');
 
   var onUploadEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {

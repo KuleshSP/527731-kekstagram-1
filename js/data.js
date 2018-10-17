@@ -22,5 +22,4 @@
   };
 
   window.load(window.successHandler, window.errorHandler);
-//  window.uploadInfo(window.onLoadSuccesHandler, window.onLoadErrorHandler);
 })();

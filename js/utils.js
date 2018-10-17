@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var SOCIAL_COMMENT_COUNT = document.querySelector('.social__comment-count');
-
   window.utils = {
     ENTER_KEYCODE: 13,
     ESC_KEYCODE: 27,
@@ -11,6 +9,4 @@
     SORTING_BUTTONS: document.querySelectorAll('.img-filters__button'),
     userDialog: document.querySelector('.pictures')
   };
-
-//  SOCIAL_COMMENT_COUNT.classList.add('hidden');
 })();
