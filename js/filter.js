@@ -7,12 +7,12 @@
   var EFFECT_MARVIN = document.querySelector('.effects__preview--marvin');
   var EFFECT_PHOBOS = document.querySelector('.effects__preview--phobos');
   var EFFECT_HEAT = document.querySelector('.effects__preview--heat');
-  var FILTERS = [EFFECT_NONE, EFFECT_CHROME, EFFECT_SEPIA, EFFECT_MARVIN, EFFECT_PHOBOS, EFFECT_HEAT];
+  window.FILTERS = [EFFECT_NONE, EFFECT_CHROME, EFFECT_SEPIA, EFFECT_MARVIN, EFFECT_PHOBOS, EFFECT_HEAT];
   var MAX_BLUR_VALUE = 3;
   var MIN_BRIGHTNESS_VALUE = 1;
   var MAX_BRIGHTNESS_VALUE = 3;
   var MAX_SCALE_VALUE = '100%';
-  var SCALE_PIN = document.querySelector('.effect-level__pin');
+  window.SCALE_PIN = document.querySelector('.effect-level__pin');
   var SCALE_LEVEL = document.querySelector('.effect-level__depth');
 
   var getFiltersClass = function (arr) {
@@ -39,15 +39,17 @@
     window.imgUploadPreview.classList.add(className);
   };
 
-  var createEventListener = function (filter, classArr) {
-    filter.addEventListener('click', function () {
-      scalePinPosition(MAX_SCALE_VALUE);
-      addEffect(classArr);
-      hideScale(classArr);
-    });
+  var filterSetup = function (classArr) {
+    scalePinPosition(MAX_SCALE_VALUE);
+    addEffect(classArr);
+    hideScale(classArr);
   };
 
-  var addEvents = function (filter, classArr) {
+  var createEventListener = function (filter, classArr) {
+    filter.addEventListener('click', filterSetup.bind(null, classArr));
+  };
+
+window.addEvents = function (filter, classArr) {
     classArr.forEach(function (el, i) {
       return createEventListener(filter[i], el);
     });
@@ -85,10 +87,7 @@
     return window.imgUploadPreview.style.filter;
   };
 
-  var filtersClassArray = getFiltersClass(FILTERS);
-  addEvents(FILTERS, filtersClassArray);
-
-  SCALE_PIN.addEventListener('mousedown', function (evt) {
+  window.onScaleDrag = function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -134,5 +133,7 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
+  };
+
+  window.filtersClassArray = getFiltersClass(FILTERS);
 })();

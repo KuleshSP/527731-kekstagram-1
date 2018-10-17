@@ -36,12 +36,16 @@
     window.UPLOAD_SCALE.classList.add('hidden');
     EFFECT_INPUT_NONE.checked = true;
   };
-  var onUploadClick = function () {
+  var onUploadChange = function () {
     UPLOAD_OVERLAY.classList.remove('hidden');
     document.addEventListener('keydown', onUploadEscPress);
     RESIZE_PLUS_BUTTON.addEventListener('click', onPlusClick);
     RESIZE_MINUS_BUTTON.addEventListener('click', onMinusClick);
     openUploadSettings();
+    CLOSE_UPLOAD_BUTTON.addEventListener('click', onCloseUploadClick);
+    UPLOAD_OVERLAY.addEventListener('keydown', uploadStopPropagation);
+    window.SCALE_PIN.addEventListener('mousedown', window.onScaleDrag);
+    window.addEvents(window.FILTERS, window.filtersClassArray);
   };
   var onCloseUploadClick = function () {
     UPLOAD_OVERLAY.classList.add('hidden');
@@ -49,6 +53,9 @@
     RESIZE_PLUS_BUTTON.removeEventListener('click', onPlusClick);
     RESIZE_MINUS_BUTTON.removeEventListener('click', onMinusClick);
     window.UPLOAD.value = '';
+    CLOSE_UPLOAD_BUTTON.removeEventListener('click', onCloseUploadClick);
+    UPLOAD_OVERLAY.removeEventListener('keydown', uploadStopPropagation);
+    window.SCALE_PIN.removeEventListener('mousedown', window.onScaleDrag);
   };
 
   var resizeImage = function (image, resizeValue) {
@@ -105,16 +112,15 @@
     }
   };
 
-  window.UPLOAD.addEventListener('change', onUploadClick);
-  CLOSE_UPLOAD_BUTTON.addEventListener('click', onCloseUploadClick);
-  UPLOAD_OVERLAY.addEventListener('keydown', function (evt) {
+  var uploadStopPropagation = function (evt) {
     if (document.activeElement === window.utils.UPLOAD_HASHTAG || document.activeElement === UPLOAD_COMMENT) {
       if (evt.keyCode === window.utils.ESC_KEYCODE) {
         evt.stopPropagation();
       }
     }
-  });
+  };
 
+  window.UPLOAD.addEventListener('change', onUploadChange);
   resizeImage(window.imgUploadPreview, defaultResizeValue);
 
   FORM.addEventListener('submit', function (evt) {

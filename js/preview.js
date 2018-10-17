@@ -17,6 +17,9 @@
   var SHOW_MORE = document.querySelector('.social__comments-loader');
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var COMMENTS_QUANTITY = 5;
+  var COUNTER = 10;
+  var DEFAULT_COUNTER_VALUE = 10;
+  var COUNTER_STEP = 5;
 
   var setBigPictureData = function (control, data, avatarIndexMin, avatarIndexMax) {
     var commentsFragment = createCommentsFragment(data, avatarIndexMin, avatarIndexMax);
@@ -136,15 +139,19 @@
     document.removeEventListener('keydown', onBigPictureEscPress);
     CLOSE_BUTTON_BIG_PICTURE.removeEventListener('click', onCloseBigPictureButtonClick);
     SHOW_MORE.removeEventListener('click', onShowMoreClick);
+    COUNTER = DEFAULT_COUNTER_VALUE;
   };
 
   var onShowMoreClick = function () {
     var socialComments = document.querySelectorAll('.social__comment');
     socialComments.forEach(function (element, index) {
-      return index > (COMMENTS_QUANTITY - 1) ? element.classList.remove('visually-hidden') : null;
+      return index < COUNTER ? element.classList.remove('visually-hidden') : null;
     });
+    COUNTER += COUNTER_STEP;
     currentCommentsQuantity();
-    SHOW_MORE.classList.add('hidden');
+    if (COUNTER - COUNTER_STEP >= socialComments.length) {
+      SHOW_MORE.classList.add('hidden');
+    }
   };
 
   window.UPLOAD.addEventListener('change', function () {

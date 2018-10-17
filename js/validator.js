@@ -4,11 +4,14 @@
   var SPACE = ' ';
   var HASHTAG_AMOUNT = 5;
   var TEXT_LIMIT = 140;
+  var SPACE_CHECK = /\S/;
 
   var splitString = function (stringToSplit, separator) {
-    var arrayOfStrings = stringToSplit.split(separator);
-
-    return arrayOfStrings;
+    var arrayOfStrings = stringToSplit.trim().split(separator);
+    var spaceCheckedArray = arrayOfStrings.filter( function (string) {
+       return SPACE_CHECK.test(string);
+    });
+    return spaceCheckedArray;
   };
 
   var sortArray = function (arrayForSorting) {
