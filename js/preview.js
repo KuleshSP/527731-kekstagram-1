@@ -52,7 +52,7 @@
   var createCommentsFragment = function (data, avatarUrlMin, avatarUrlMax) {
     var fragment = document.createDocumentFragment();
     data.comments.forEach(function (el) {
-      var text = el;
+      var text = el.message;
       var url = generateAvatarUrl(avatarUrlMin, avatarUrlMax);
       var commentItem = renderComment(text, url);
       fragment.appendChild(commentItem);
